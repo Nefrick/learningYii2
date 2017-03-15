@@ -1,1 +1,1 @@
-My Demo Progect
+My Cool Demo Project
