@@ -21,6 +21,9 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'security' => [
+            'passwordHashStrategy' => 'password_hash'
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
@@ -30,7 +33,13 @@ $config = [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false
+            'showScriptName' => false,
+            'rules' => [
+                'register' => 'monster/create'
+            ]
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager'
         ],
         'view' => [
             'class' => 'app\components\View'

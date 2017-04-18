@@ -60,6 +60,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        //$this->actionLoadMonsters();
         return $this->render('index');
     }
     public function actionLoadMonsters()
@@ -101,9 +102,17 @@ class SiteController extends Controller
                 'username' => 'broomrider4eva',
                 'password' => 'getyoumypretty'
             ],
+            [
+                'name' => 'Wicked Witch2',
+                'age' => 44,
+                'gender' => 'f',
+                'username' => 'broomrider4eva2',
+                'password' => 'getyoumypretty2'
+            ],
         ];
         foreach ($monsterData as $data) {
             $monster = new Monster($data);
+            $monster->hashPassword = true;
             $monster->save();
         }
     }

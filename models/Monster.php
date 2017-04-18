@@ -3,8 +3,12 @@
 namespace app\models;
 
 use Yii;
-use yii\base\NotSupportedException;
+use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\base\NotSupportedException;
+use yii\helpers\Url;
+use yii\helpers\Html;
+
 
 /**
  * This is the model class for table "monster".
@@ -17,8 +21,9 @@ use yii\web\IdentityInterface;
  * @property string $password
  * @property string $authKey
  */
-class Monster extends \yii\db\ActiveRecord implements IdentityInterface
+class Monster extends ActiveRecord implements IdentityInterface
 {
+    public $hashPassword = false;
     /**
      * @inheritdoc
      */
@@ -36,6 +41,9 @@ class Monster extends \yii\db\ActiveRecord implements IdentityInterface
             [['age'], 'integer'],
             [['name', 'username', 'password', 'authKey'], 'string', 'max' => 255],
             [['gender'], 'string', 'max' => 1],
+            [['username'], 'unique'],
+            [['password'], 'string', 'min' => 6],
+            [['gender'], 'in', 'range' => ['m','f']]
         ];
     }
 
@@ -46,7 +54,7 @@ class Monster extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Full Name',
             'age' => 'Age',
             'gender' => 'Gender',
             'username' => 'Username',
@@ -91,7 +99,33 @@ class Monster extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function validatePassword($password)
     {
-        return ($password === $this->password);
+        return \Yii::$app->security->validatePassword($password, $this->password);
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->hashPassword) {
+                $this->password = \Yii::$app->security->generatePasswordHash($this->password, 10);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            $auth = Yii::$app->authManager;
+            if ($this->name == "Dracula") {
+                $role = $auth->getRole('admin');
+            } else {
+                $role = $auth->getRole('member');
+            }
+            $auth->assign($role, $this->id);
+        }
+
+        parent::afterSave($insert, $changedAttributes);
+    }
 }
