@@ -92,9 +92,33 @@ class Monster extends ActiveRecord implements IdentityInterface
         return $this->getAuthKey() === $authKey;
     }
 
+    public function getPhotoInfo()
+    {
+        $path = Url::to('@webroot/images/photos/');
+        $url = Url::to('@web/images/photos/');
+        $filename = strtolower($this->name) . '.jpg';
+        $alt = $this->username . "'s Profile Picture";
+        $imageInfo = ['alt'=> $alt];
+        if (file_exists($path . $filename)) {
+            $imageInfo['url'] = $url.$filename;
+        } else {
+            $imageInfo['url'] = $url.'default.jpg';
+        }
+        return $imageInfo;
+    }
+
+    public function getProfileGender()
+    {
+        return ($this->gender === 'm') ? 'Bachelor' : 'Bachelorette';
+    }
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username ]);
+    }
+
+    public function getRating(){
+
+        return ($this->gender === 'm') ? '5' : '23';
     }
 
     public function validatePassword($password)

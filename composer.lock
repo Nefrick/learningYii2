@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5438861ad666f7367e7d9ae0e539b7d0",
+    "content-hash": "a261c029b6c8d589ef3a9b9518e38546",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -137,6 +137,52 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/lightbox2",
+            "version": "v2.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lokesh/lightbox2.git",
+                "reference": "2eedbf5c740e530e7abc78db6cf0ecec408f6512"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lokesh/lightbox2/zipball/2eedbf5c740e530e7abc78db6cf0ecec408f6512",
+                "reference": "2eedbf5c740e530e7abc78db6cf0ecec408f6512",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": "~2"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./dist/js/lightbox.js",
+                    "./dist/css/lightbox.css",
+                    "./dist/images/close.png",
+                    "./dist/images/loading.gif",
+                    "./dist/images/next.png",
+                    "./dist/images/prev.png"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "The original Lightbox script. Uses jQuery.",
+            "keywords": [
+                "gallery",
+                "images",
+                "lightbox",
+                "lightbox2",
+                "overlay",
+                "slideshow"
             ]
         },
         {
@@ -304,6 +350,80 @@
                 "html"
             ],
             "time": "2016-07-16T12:58:58+00:00"
+        },
+        {
+            "name": "hiqdev/yii2-asset-lightbox2",
+            "version": "2.8.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hiqdev/yii2-asset-lightbox2.git",
+                "reference": "b450b4add6d4bac559f489a73d30007a596ab914"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hiqdev/yii2-asset-lightbox2/zipball/b450b4add6d4bac559f489a73d30007a596ab914",
+                "reference": "b450b4add6d4bac559f489a73d30007a596ab914",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/lightbox2": "2.8.2",
+                "yiisoft/yii2": "~2.0"
+            },
+            "require-dev": {
+                "hiqdev/hidev-php": "<2.0",
+                "hiqdev/hidev-vendor": "<2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "hiqdev\\assets\\lightbox2\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Naumenko",
+                    "email": "silverfire@hiqdev.com",
+                    "homepage": "http://silverfire.me/",
+                    "role": "Lead backend developer"
+                },
+                {
+                    "name": "Andrii Vasyliev",
+                    "email": "sol@hiqdev.com",
+                    "homepage": "http://hipanel.com/",
+                    "role": "Project lead"
+                },
+                {
+                    "name": "Andrey Klochok",
+                    "email": "tafid@hiqdev.com",
+                    "homepage": "http://hiqdev.com/",
+                    "role": "Lead frontend developer"
+                },
+                {
+                    "name": "Yuriy Myronchuk",
+                    "email": "bladeroot@hiqdev.com",
+                    "homepage": "http://hiqdev.com/",
+                    "role": "QA Lead"
+                }
+            ],
+            "description": "Yii2 asset for bower LightBox2",
+            "homepage": "https://github.com/hiqdev/yii2-asset-lightbox2",
+            "keywords": [
+                "asset",
+                "extension",
+                "lightbox2",
+                "yii2"
+            ],
+            "time": "2016-12-09T17:33:19+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

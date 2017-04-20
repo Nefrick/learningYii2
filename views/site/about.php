@@ -5,9 +5,11 @@
 use yii\helpers\Html;
 use app\models\Monstertest;
 use app\models\Monster;
-
+use yii\helpers\ArrayHelper;
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
+$selectedMonster = (!Yii::$app->user->isGuest) ? Yii::$app->user->identity->name : '';
+$monsterMap = ArrayHelper::map(Monster::find()->all(), 'name', 'name');
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -93,4 +95,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         Validate Monster 1 Error: <pre><?= var_dump($validateMonster1->errors);?></pre>
     </p>
+    <p><h3>Enter your favorite monster's name</h3>
+    <?=Html::beginForm();?>
+    <?=Html::dropDownList('monsterName', $selectedMonster, $monsterMap);?>
+
+    <?=Html::input('submit','monsterSubmit', 'submit', ['id'=>'monsterSubmit']);?>
+    <?=Html::endForm();?>
+    </p>
+    <?php // if ($monsterName): ?>
+    <p class="monster-name">Your favorite monster's name is: <?php //Html::endcode($monsterName)?></p>
+    <?php // endif;?>
+
+    <code><?=__FILE__?></code>
 </div>

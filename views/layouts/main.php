@@ -27,18 +27,26 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Web Ape',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar',
         ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Members', 'url' => ['/monster/index']],
+            [
+                'label' => 'Register',
+                'url'   => ['/register'],
+                'visible' => Yii::$app->user->isGuest
+            ],
+            [
+                'label' => 'My Profile',
+                'url'   => ['/monster/update', 'id' => Yii::$app->user->id],
+                'visible' => !Yii::$app->user->isGuest
+            ],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
