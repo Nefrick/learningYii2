@@ -38,7 +38,7 @@ class Monster extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['age'], 'integer'],
+            [['age','skinId'], 'integer'],
             [['name', 'username', 'password', 'authKey'], 'string', 'max' => 255],
             [['gender'], 'string', 'max' => 1],
             [['username'], 'unique'],
@@ -59,10 +59,14 @@ class Monster extends ActiveRecord implements IdentityInterface
             'gender' => 'Gender',
             'username' => 'Username',
             'password' => 'Password',
+            'skinId' => 'skinId',
             'authKey' => 'Auth Key',
         ];
     }
-
+    public function getSkin()
+    {
+        return $this->hasOne(Skin::className(), ['id' => 'skinId']);
+    }
 
     public static function findIdentity($id)
     {
